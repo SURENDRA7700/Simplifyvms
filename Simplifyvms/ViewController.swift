@@ -8,11 +8,29 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .white
+        self.tabBar.tintColor = UIColor.Simplify.Blue
+        
+        let storyboard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
+        let stockVC = storyboard.instantiateViewController(withIdentifier: "StacksVC") as? StacksVC
+        let stockTab = UINavigationController(rootViewController: stockVC!)
+        stockTab.tabBarItem.image = UIImage(named: "stockTab")?.withRenderingMode(.alwaysTemplate)
+        stockTab.title = "Stacks"
+        let itemInfoVC = storyboard.instantiateViewController(withIdentifier: "ItemInfoVC") as? ItemInfoVC
+        let infoTab = UINavigationController(rootViewController: itemInfoVC!)
+        infoTab.tabBarItem.image = UIImage(named: "infoTab")?.withRenderingMode(.alwaysTemplate)
+        infoTab.title = "Info"
+        
+        self.tabBar.unselectedItemTintColor = UIColor.Simplify.Black
+        viewControllers = [stockTab,infoTab]
+        for vc in self.viewControllers! {
+            vc.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
+        }
+
     }
 
 
