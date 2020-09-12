@@ -27,8 +27,7 @@ class ItemInfoVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+        self.title = "Selected Items"
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -85,3 +84,5 @@ extension ItemInfoVC : UITableViewDelegate, UITableViewDataSource
         return stringArray.joined(separator: ",")
     }
 }
+
+

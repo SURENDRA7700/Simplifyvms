@@ -32,7 +32,7 @@ struct Item: Codable {
     let questionID: Int?
     let contentLicense: ContentLicense?
     let link: String?
-    let title: String?
+    let title: String
     let lastEditDate, closedDate: Int?
     let closedReason: String?
     var isSelectedFav: Bool? = false

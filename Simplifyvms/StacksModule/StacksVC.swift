@@ -14,14 +14,17 @@ let BlogsInfoUrl = BASEURL + "search?order=desc&sort=activity&intitle=perl&site=
 
 //https://api.stackexchange.com/2.2/search?page=1&pagesize=10&order=desc&min=10&sort=activity&intitle=perl&site=stackoverflow
 
-class StacksVC: UIViewController, UITextFieldDelegate {
+class StacksVC: UIViewController {
     
     var searchBarHeright: NSLayoutConstraint?
+    var searchActive : Bool = false
+
     var blogsArray : [Item]? = [] {
         didSet {
             tableview.reloadData()
         }
     }
+    var filterArray : [Item]? = []
     
     private var stocksData : BlogStocksModel? = nil
     var isDataLoading:Bool=false
@@ -30,18 +33,21 @@ class StacksVC: UIViewController, UITextFieldDelegate {
     var offset:Int=0 //pageNo*limit
     var didEndReached:Bool=false
 
+    
+    lazy var searchField:UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.searchBarStyle = UISearchBar.Style.minimal
+        searchBar.placeholder = "Search Items"
+        searchBar.sizeToFit()
+        searchBar.showsCancelButton = true;
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.tintColor = UIColor.Simplify.DarkBlue
+        return searchBar
+
+    }()
 
     
-    let searchField: CustomSearchBar = {
-        let bar = CustomSearchBar()
-        bar.translatesAutoresizingMaskIntoConstraints = false
-        bar.placeholder = "Search Items"
-        bar.setRightViewIcon(imageName: "searchIcon")
-        bar.layer.cornerRadius = 25
-        bar.keyboardType = .webSearch
-        bar.textAlignment = .natural
-        return bar
-    }()
+    
     
     lazy var tableview: UITableView = {
         let tableView = UITableView()
@@ -69,12 +75,12 @@ class StacksVC: UIViewController, UITextFieldDelegate {
         view.addSubview(searchField)
         NSLayoutConstraint.activate([
             searchField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            searchField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
-            searchField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
+            searchField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            searchField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
         ])
         searchBarHeright = searchField.heightAnchor.constraint(equalToConstant: 50)
         searchBarHeright?.isActive = true
-        searchField.delegate = self;
+        searchField.delegate = self
         
         view.addSubview(tableview)
         tableview.topAnchor.constraint(equalTo: searchField.bottomAnchor, constant: 20).isActive = true
@@ -85,7 +91,7 @@ class StacksVC: UIViewController, UITextFieldDelegate {
         tableview.register(nibName, forCellReuseIdentifier: "BlogCell")
         tableview.separatorStyle = .none
         tableview.rowHeight = UITableView.automaticDimension
-        tableview.estimatedRowHeight = 200
+        tableview.estimatedRowHeight = 150
 
     }
     
@@ -118,6 +124,8 @@ class StacksVC: UIViewController, UITextFieldDelegate {
 }
 
 
+//MARK:- UITableView Module
+
 extension StacksVC : UITableViewDelegate, UITableViewDataSource
 {
     
@@ -126,22 +134,38 @@ extension StacksVC : UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.blogsArray?.count ?? 0
+        if self.searchActive {
+            if self.filterArray!.count >= 1 {
+                return self.filterArray!.count
+            }
+        }else{
+            if self.blogsArray!.count >= 1 {
+                return self.blogsArray!.count
+            }
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BlogCell", for: indexPath) as! BlogCell
-        let eachBlog = self.blogsArray?[indexPath.row]
-        cell.titleLabel.text = eachBlog?.title
-        let string = self.getString(array: (eachBlog?.tags)!)
-        cell.tagsView.text = string
-        cell.blogBtn.eachItem = eachBlog
-        cell.blogBtn.addTarget(self, action: #selector(favItemSelected(sender:)), for: .touchUpInside)
-        cell.blogBtn.tag = indexPath.row
-        if (eachBlog?.isSelectedFav)! {
-            cell.blogBtn.setImage(#imageLiteral(resourceName: "star-trek"), for: .normal)
+        var eachBlog : Item? = nil
+        if self.searchActive && self.filterArray!.count >= 1  {
+            eachBlog = self.filterArray?[indexPath.row]
         }else{
-            cell.blogBtn.setImage(#imageLiteral(resourceName: "RadioDeselected"), for: .normal)
+            eachBlog = self.blogsArray?[indexPath.row]
+        }
+        if eachBlog != nil  {
+            cell.titleLabel.text = eachBlog?.title
+            let string = self.getString(array: (eachBlog?.tags)!)
+            cell.tagsView.text = string
+            cell.blogBtn.eachItem = eachBlog
+            cell.blogBtn.addTarget(self, action: #selector(favItemSelected(sender:)), for: .touchUpInside)
+            cell.blogBtn.tag = indexPath.row
+            if (eachBlog?.isSelectedFav)! {
+                cell.blogBtn.setImage(#imageLiteral(resourceName: "star-trek"), for: .normal)
+            }else{
+                cell.blogBtn.setImage(#imageLiteral(resourceName: "RadioDeselected"), for: .normal)
+            }
         }
         return cell
     }
@@ -171,9 +195,9 @@ extension StacksVC : UITableViewDelegate, UITableViewDataSource
         }
     }
 
-     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-         isDataLoading = false
-     }
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.searchField.resignFirstResponder()
+    }
     
      //Pagination
      func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
@@ -194,24 +218,82 @@ extension StacksVC : UITableViewDelegate, UITableViewDataSource
         return stringArray.joined(separator: ",")
     }
        
-    
     @objc func favItemSelected(sender:BlogBuuton){
         sender.isSelected = !sender.isSelected
-        var eachBlog = self.blogsArray?[sender.tag]
+        var eachBlog : Item? = nil
+        if self.searchActive {
+            eachBlog = self.filterArray?[sender.tag]
+        }else{
+            eachBlog = self.blogsArray?[sender.tag]
+        }
         if sender.isSelected {
             eachBlog?.isSelectedFav = true
-            WebServices.shared.userCartData?.append(eachBlog!)
         }else{
             eachBlog?.isSelectedFav = false
-            WebServices.shared.userCartData?.remove(at: sender.tag)
         }
-        self.blogsArray?[sender.tag] = eachBlog!
+        if let index = WebServices.shared.userCartData?.index(where: {$0.owner?.userID == eachBlog?.owner?.userID}) {
+            WebServices.shared.userCartData?.remove(at: index)
+        }else{
+            WebServices.shared.userCartData?.append(eachBlog!)
+        }
+        if let index = self.blogsArray?.index(where: {$0.owner?.userID == eachBlog?.owner?.userID}) {
+            self.blogsArray?[index] = eachBlog!
+        }
+        if self.searchActive {
+            self.filterArray?[sender.tag] = eachBlog!
+        }
         tableview.reloadData()
     }
 
 }
+
+
+extension StacksVC : UISearchBarDelegate {
     
+   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                searchBar.resignFirstResponder()
+                self.searchActive = false
+                self.tableview.reloadData()
+            }
+        }
+    }
+    
+ 
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.searchActive = true
+    }
+
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.searchActive = false
+        self.searchField.resignFirstResponder()
+        
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.searchActive = true
+        let searchString = searchBar.text?.trimWhiteSpace()
+        if searchString != "", searchString!.count > 0 {
+            filterArray?.removeAll()
+            if let text = searchField.text {
+                filterArray = self.blogsArray?.filter{
+                    ($0.title.lowercased().contains(text.lowercased())) ||  ($0.tags?.contains(text))!
+                }
+            }
+        }
+        tableview.reloadData()
+        self.searchField.resignFirstResponder()
+   }
+
+    
+}
+
 
 extension String {
-    
+    func trimWhiteSpace() -> String {
+        let string = self.trimmingCharacters(in: .whitespacesAndNewlines)
+        return string
+    }
 }
