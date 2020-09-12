@@ -42,6 +42,7 @@ class StacksVC: UIViewController {
         searchBar.showsCancelButton = true;
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         searchBar.tintColor = UIColor.Simplify.DarkBlue
+        searchBar.autocapitalizationType = .none
         return searchBar
 
     }()
@@ -271,7 +272,7 @@ extension StacksVC : UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         self.searchActive = false
         self.searchField.resignFirstResponder()
-        
+        self.tableview.reloadData()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
