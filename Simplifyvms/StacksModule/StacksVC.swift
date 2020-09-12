@@ -91,7 +91,7 @@ class StacksVC: UIViewController {
         tableview.register(nibName, forCellReuseIdentifier: "BlogCell")
         tableview.separatorStyle = .none
         tableview.rowHeight = UITableView.automaticDimension
-        tableview.estimatedRowHeight = 150
+        tableview.estimatedRowHeight = 100
 
     }
     
@@ -186,10 +186,12 @@ extension StacksVC : UITableViewDelegate, UITableViewDataSource
                 // Fallback on earlier versions
                  spinner = UIActivityIndicatorView(style:.gray)
             }
-            spinner.startAnimating()
             spinner.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: tableView.bounds.width, height: CGFloat(44))
             tableView.tableFooterView = spinner
             tableView.tableFooterView?.isHidden = false
+            if lastRowIndex < 8 {
+                tableView.tableFooterView?.isHidden = true
+            }
         }else{
             tableView.tableFooterView = nil
         }

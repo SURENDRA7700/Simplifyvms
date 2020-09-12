@@ -33,6 +33,11 @@ class ItemInfoVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.blogsArray = WebServices.shared.userCartData
+        if self.blogsArray!.isEmpty {
+            ErrorManager.showErrorAlert(mainTitle: "", subTitle: "Cart is Empty")
+        }else{
+            ErrorManager.showSuccessAlert(mainTitle: "", subTitle: "Cat has \(self.blogsArray?.count ?? 0) Items")
+        }
         self.configureTbleView()
     }
     
@@ -47,7 +52,7 @@ class ItemInfoVC: UIViewController {
         tableview.register(nibName, forCellReuseIdentifier: "BlogCell")
         tableview.separatorStyle = .none
         tableview.rowHeight = UITableView.automaticDimension
-        tableview.estimatedRowHeight = 200
+        tableview.estimatedRowHeight = 120
     }
     
 }

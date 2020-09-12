@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "closure #1 in StacksVC.textFieldShouldReturn(_:):StacksVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "filterArray">
+            </PersistentString>
+            <PersistentString
+               value = "self.blogsArray">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "StacksVC.textFieldShouldReturn(_:):StacksVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "filterArray">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
