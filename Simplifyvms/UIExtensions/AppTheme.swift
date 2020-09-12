@@ -1,9 +1,8 @@
+
+//  Simplifyvms
 //
-//  AppTheme.swift
-//  Rasedi
-//
-//  Created by Vijesh on 29/03/2018.
-//  Copyright © 2018 DNet. All rights reserved.
+//  Created by surendra kumar k on 11/09/20.
+//  Copyright © 2020 Semanoor. All rights reserved.
 //
 
 import Foundation

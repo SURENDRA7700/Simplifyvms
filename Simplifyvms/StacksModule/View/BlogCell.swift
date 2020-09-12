@@ -10,8 +10,10 @@ import UIKit
 
 class BlogCell: UITableViewCell {
 
-    @IBOutlet weak var foodInfoLabel: UILabel!
-    @IBOutlet weak var foodDateLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var tagsView: UITextView!
+    @IBOutlet weak var blogBtn: BlogBuuton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -26,3 +28,6 @@ class BlogCell: UITableViewCell {
 }
 
 
+class BlogBuuton: UIButton {
+    var eachItem: Item?
+}

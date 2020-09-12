@@ -19,6 +19,11 @@
 		F9561C86250BCE5600733724 /* CustomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9561C85250BCE5600733724 /* CustomViews.swift */; };
 		F9561C8A250BD1E700733724 /* BlogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9561C88250BD1E700733724 /* BlogCell.swift */; };
 		F9561C8B250BD1E700733724 /* BlogCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9561C89250BD1E700733724 /* BlogCell.xib */; };
+		F9570290250C7D82008CE32D /* WebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = F957028F250C7D82008CE32D /* WebServices.swift */; };
+		F9570292250C7DCC008CE32D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9570291250C7DCC008CE32D /* NetworkManager.swift */; };
+		F9570295250C8006008CE32D /* BlogModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9570294250C8006008CE32D /* BlogModel.swift */; };
+		F9570298250C82FA008CE32D /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9570297250C82FA008CE32D /* Reachability.swift */; };
+		F957029A250C8C13008CE32D /* MyBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9570299250C8C13008CE32D /* MyBanner.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +41,11 @@
 		F9561C85250BCE5600733724 /* CustomViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomViews.swift; sourceTree = "<group>"; };
 		F9561C88250BD1E700733724 /* BlogCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlogCell.swift; sourceTree = "<group>"; };
 		F9561C89250BD1E700733724 /* BlogCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BlogCell.xib; sourceTree = "<group>"; };
+		F957028F250C7D82008CE32D /* WebServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServices.swift; sourceTree = "<group>"; };
+		F9570291250C7DCC008CE32D /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		F9570294250C8006008CE32D /* BlogModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogModel.swift; sourceTree = "<group>"; };
+		F9570297250C82FA008CE32D /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		F9570299250C8C13008CE32D /* MyBanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyBanner.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +78,7 @@
 		F9561C67250BC45800733724 /* Simplifyvms */ = {
 			isa = PBXGroup;
 			children = (
+				F9570296250C82FA008CE32D /* NetworkManager */,
 				F9561C7E250BC69300733724 /* UIExtensions */,
 				F9561C68250BC45800733724 /* AppDelegate.swift */,
 				F9561C6A250BC45800733724 /* SceneDelegate.swift */,
@@ -85,6 +96,7 @@
 		F9561C7E250BC69300733724 /* UIExtensions */ = {
 			isa = PBXGroup;
 			children = (
+				F957028F250C7D82008CE32D /* WebServices.swift */,
 				F9561C85250BCE5600733724 /* CustomViews.swift */,
 				F9561C7C250BC67700733724 /* AppTheme.swift */,
 			);
@@ -94,6 +106,7 @@
 		F9561C7F250BC75700733724 /* StacksModule */ = {
 			isa = PBXGroup;
 			children = (
+				F9570293250C7FEC008CE32D /* Model */,
 				F9561C87250BD1E700733724 /* View */,
 				F9561C80250BC7AC00733724 /* StacksVC.swift */,
 			);
@@ -115,6 +128,24 @@
 				F9561C89250BD1E700733724 /* BlogCell.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		F9570293250C7FEC008CE32D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F9570294250C8006008CE32D /* BlogModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F9570296250C82FA008CE32D /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				F9570299250C8C13008CE32D /* MyBanner.swift */,
+				F9570291250C7DCC008CE32D /* NetworkManager.swift */,
+				F9570297250C82FA008CE32D /* Reachability.swift */,
+			);
+			path = NetworkManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,13 +221,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9561C6D250BC45800733724 /* ViewController.swift in Sources */,
+				F957029A250C8C13008CE32D /* MyBanner.swift in Sources */,
 				F9561C84250BC87D00733724 /* ItemInfoVC.swift in Sources */,
+				F9570298250C82FA008CE32D /* Reachability.swift in Sources */,
+				F9570292250C7DCC008CE32D /* NetworkManager.swift in Sources */,
 				F9561C86250BCE5600733724 /* CustomViews.swift in Sources */,
 				F9561C7D250BC67800733724 /* AppTheme.swift in Sources */,
 				F9561C69250BC45800733724 /* AppDelegate.swift in Sources */,
+				F9570295250C8006008CE32D /* BlogModel.swift in Sources */,
 				F9561C8A250BD1E700733724 /* BlogCell.swift in Sources */,
 				F9561C6B250BC45800733724 /* SceneDelegate.swift in Sources */,
 				F9561C81250BC7AC00733724 /* StacksVC.swift in Sources */,
+				F9570290250C7D82008CE32D /* WebServices.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
