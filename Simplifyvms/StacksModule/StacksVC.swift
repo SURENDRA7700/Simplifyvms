@@ -106,7 +106,6 @@ class StacksVC: UIViewController, UITextFieldDelegate {
                 guard self.stocksData?.items != nil else {
                     ErrorManager.showErrorAlert(mainTitle: "", subTitle: "error")
                     return }
-                ErrorManager.showSuccessAlert(mainTitle: "Success iTEMS \(self.stocksData?.items?.count)", subTitle: "")
                 if (self.blogsArray != nil) {
                     self.blogsArray?.append(contentsOf: (self.stocksData?.items)!)
                 }
@@ -212,3 +211,7 @@ extension StacksVC : UITableViewDelegate, UITableViewDataSource
 
 }
     
+
+extension String {
+    
+}
