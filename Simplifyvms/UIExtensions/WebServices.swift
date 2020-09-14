@@ -67,7 +67,7 @@ class WebServices: NSObject {
     
     func getServiceCall<T:Codable>(type : T.Type,urlString : String,requiredToken: Bool, view: UIView, animateIndicator: Bool,complete CompletionHandler : @escaping(T?)->Void)
     {
-        if (NetworkManager.sharedInstance.reachability.isReachable) {
+        if (NetworkManager.sharedInstance.reachability.isConnectedToNetwork)() {
             var activityIndicatorObj = UIActivityIndicatorView()
             DispatchQueue.main.async {
                 activityIndicatorObj = self.showActivityIndicator(view: view, animate:true)
@@ -170,5 +170,18 @@ extension NSObject {
             indicator.stopAnimating()
         })
         
+    }
+}
+
+
+extension UIViewController
+{
+    func viewLayout(view:UIView,top:NSLayoutYAxisAnchor,bottom:NSLayoutYAxisAnchor,leading:NSLayoutXAxisAnchor,trailing:NSLayoutXAxisAnchor)
+    {
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.topAnchor.constraint(equalToSystemSpacingBelow: top, multiplier: 0).isActive = true
+        view.bottomAnchor.constraint(equalToSystemSpacingBelow: bottom, multiplier: 0).isActive = true
+        view.leadingAnchor.constraint(equalToSystemSpacingAfter: leading, multiplier: 0).isActive = true
+        view.trailingAnchor.constraint(equalToSystemSpacingAfter: trailing, multiplier: 0).isActive = true
     }
 }

@@ -21,10 +21,12 @@ class StacksVC: UIViewController {
 
     var blogsArray : [Item]? = [] {
         didSet {
+            tableview.isHidden = false
             tableview.reloadData()
         }
     }
     var filterArray : [Item]? = []
+    private let emptyStateView = Bundle.main.loadNibNamed("EmptyStateView", owner: self, options: nil)?.first as! EmptyStateView
     
     private var stocksData : BlogStocksModel? = nil
     var isDataLoading:Bool=false
@@ -99,32 +101,43 @@ class StacksVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.getBlogDetails(pageIndex:self.pageNo)
-
-        
     }
     
     private func getBlogDetails(pageIndex : Int)
     {
-        let url : String? = "\(BlogsInfoUrl)\(pageIndex)"
-        WebServices.shared.getServiceCall(type: BlogStocksModel.self, urlString: url!, requiredToken: false, view: self.view, animateIndicator: true)
-        {  (response) in
-            do {
-                DispatchQueue.main.async {
-                    self.stocksData = response
-                    guard self.stocksData?.items != nil else {
-                        ErrorManager.showErrorAlert(mainTitle: "", subTitle: "error")
-                        return }
-                    if (self.blogsArray != nil) {
-                        self.blogsArray?.append(contentsOf: (self.stocksData?.items)!)
+        if (NetworkManager.sharedInstance.reachability.isConnectedToNetwork()) {
+            self.emptyStateView.removeFromSuperview()
+            let url : String? = "\(BlogsInfoUrl)\(pageIndex)"
+            WebServices.shared.getServiceCall(type: BlogStocksModel.self, urlString: url!, requiredToken: false, view: self.view, animateIndicator: true)
+            {  (response) in
+                do {
+                    DispatchQueue.main.async {
+                        self.stocksData = response
+                        guard self.stocksData?.items != nil else {
+                            ErrorManager.showErrorAlert(mainTitle: "", subTitle: "error")
+                            return }
+                        if (self.blogsArray != nil) {
+                            self.blogsArray?.append(contentsOf: (self.stocksData?.items)!)
+                        }
                     }
                 }
+                catch let error {
+                    ErrorManager.showErrorAlert(mainTitle: "", subTitle: error.localizedDescription)
+                }
             }
-            catch let error {
-                ErrorManager.showErrorAlert(mainTitle: "", subTitle: error.localizedDescription)
-            }
+        }else{
+            tableview.isHidden = true
+            self.emptyStateView.values(headerTitle: "", stateImage: UIImage(named: "internet")!, title: "Oops! No internet connection", subTitle: "Please check your internet connection and try again", stateActionTitle: "Try again")
+            self.emptyStateView.stateAction.addTarget(self, action: #selector(self.tryInternetConnection), for: .touchUpInside)
+            self.view.addSubview(self.emptyStateView)
         }
     }
 
+    
+    @objc func tryInternetConnection()
+    {
+        self.getBlogDetails(pageIndex:self.pageNo)
+    }
    
     
 }
@@ -145,7 +158,7 @@ extension StacksVC : UITableViewDelegate, UITableViewDataSource
                 self.tableview.restore()
                 return self.filterArray!.count
             }else{
-                self.tableview.setEmptyMessage("Sorry, No Items Found!, try Something else")
+                self.tableview.setEmptyMessage("Sorry, No items found!, \n try Something else")
             }
         }else{
             if self.blogsArray!.count >= 1 {
@@ -341,3 +354,4 @@ extension UITableView {
         self.backgroundView = nil
     }
 }
+

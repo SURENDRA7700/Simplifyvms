@@ -76,5 +76,7 @@ class NetworkManager: NSObject {
             completed(NetworkManager.sharedInstance)
         }
     }
+    
 }
+
 

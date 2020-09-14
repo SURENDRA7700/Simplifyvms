@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F92F3157250FB9190042818D /* EmptyStateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F92F3155250FB9190042818D /* EmptyStateView.xib */; };
+		F92F3158250FB9190042818D /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92F3156250FB9190042818D /* EmptyStateView.swift */; };
 		F9561C69250BC45800733724 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9561C68250BC45800733724 /* AppDelegate.swift */; };
 		F9561C6B250BC45800733724 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9561C6A250BC45800733724 /* SceneDelegate.swift */; };
 		F9561C6D250BC45800733724 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9561C6C250BC45800733724 /* ViewController.swift */; };
@@ -27,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F92F3155250FB9190042818D /* EmptyStateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmptyStateView.xib; sourceTree = "<group>"; };
+		F92F3156250FB9190042818D /* EmptyStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		F9561C65250BC45800733724 /* Simplifyvms.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Simplifyvms.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9561C68250BC45800733724 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F9561C6A250BC45800733724 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +63,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F92F3154250FB9190042818D /* Empty Views */ = {
+			isa = PBXGroup;
+			children = (
+				F92F3155250FB9190042818D /* EmptyStateView.xib */,
+				F92F3156250FB9190042818D /* EmptyStateView.swift */,
+			);
+			path = "Empty Views";
+			sourceTree = "<group>";
+		};
 		F9561C5C250BC45800733724 = {
 			isa = PBXGroup;
 			children = (
@@ -78,6 +91,7 @@
 		F9561C67250BC45800733724 /* Simplifyvms */ = {
 			isa = PBXGroup;
 			children = (
+				F92F3154250FB9190042818D /* Empty Views */,
 				F9570296250C82FA008CE32D /* NetworkManager */,
 				F9561C7E250BC69300733724 /* UIExtensions */,
 				F9561C68250BC45800733724 /* AppDelegate.swift */,
@@ -207,6 +221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9561C75250BC45900733724 /* LaunchScreen.storyboard in Resources */,
+				F92F3157250FB9190042818D /* EmptyStateView.xib in Resources */,
 				F9561C8B250BD1E700733724 /* BlogCell.xib in Resources */,
 				F9561C72250BC45900733724 /* Assets.xcassets in Resources */,
 				F9561C70250BC45800733724 /* Main.storyboard in Resources */,
@@ -226,6 +241,7 @@
 				F9570298250C82FA008CE32D /* Reachability.swift in Sources */,
 				F9570292250C7DCC008CE32D /* NetworkManager.swift in Sources */,
 				F9561C86250BCE5600733724 /* CustomViews.swift in Sources */,
+				F92F3158250FB9190042818D /* EmptyStateView.swift in Sources */,
 				F9561C7D250BC67800733724 /* AppTheme.swift in Sources */,
 				F9561C69250BC45800733724 /* AppDelegate.swift in Sources */,
 				F9570295250C8006008CE32D /* BlogModel.swift in Sources */,
