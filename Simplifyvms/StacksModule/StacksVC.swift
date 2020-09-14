@@ -142,7 +142,10 @@ extension StacksVC : UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.searchActive {
             if self.filterArray!.count >= 1 {
+                self.tableview.restore()
                 return self.filterArray!.count
+            }else{
+                self.tableview.setEmptyMessage("Sorry, No Items Found!, try Something else")
             }
         }else{
             if self.blogsArray!.count >= 1 {
@@ -319,5 +322,22 @@ extension String {
     func trimWhiteSpace() -> String {
         let string = self.trimmingCharacters(in: .whitespacesAndNewlines)
         return string
+    }
+}
+
+extension UITableView {
+    func setEmptyMessage(_ message: String) {
+        let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height))
+        messageLabel.text = message
+        messageLabel.textColor = .black
+        messageLabel.numberOfLines = 0
+        messageLabel.textAlignment = .center
+        messageLabel.sizeToFit()
+        self.backgroundView = messageLabel
+        self.separatorStyle = .none
+    }
+
+    func restore() {
+        self.backgroundView = nil
     }
 }
