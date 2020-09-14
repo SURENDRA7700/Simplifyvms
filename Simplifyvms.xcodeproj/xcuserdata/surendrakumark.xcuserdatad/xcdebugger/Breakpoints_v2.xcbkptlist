@@ -30,8 +30,8 @@
             filePath = "Simplifyvms/StacksModule/StacksVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "171"
-            endingLineNumber = "171"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -46,8 +46,8 @@
             filePath = "Simplifyvms/StacksModule/StacksVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -55,31 +55,79 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "401FE088-0E79-4A3B-9E35-5274B42F7B1B"
+            uuid = "7D9B0AA9-0F73-454C-B255-7C137EA70FA7"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Simplifyvms/StacksModule/StacksVC.swift"
+            filePath = "Simplifyvms/UIExtensions/WebServices.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "273"
-            endingLineNumber = "273"
-            landmarkName = "searchBarCancelButtonClicked(_:)"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
+            landmarkName = "showAlertWithYESNO(title:message:isConditional:prentview:completionBlock:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "7D9B0AA9-0F73-454C-B255-7C137EA70FA7 - 1ed73b6db079e45c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Simplifyvms.WebServices.showAlertWithYESNO(title: Swift.String, message: Swift.String, isConditional: Swift.Bool, prentview: __C.UIView, completionBlock: (Swift.Bool) -&gt; ()) -&gt; ()"
+                  moduleName = "Simplifyvms"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/surendrakumark/Dropbox/My%20Mac%20(surendras-MacBook-Air.local)/Desktop/swift_1/Simplifyvms/Simplifyvms/UIExtensions/WebServices.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "121"
+                  endingLineNumber = "121"
+                  offsetFromSymbolStart = "1497">
+               </Location>
+               <Location
+                  uuid = "7D9B0AA9-0F73-454C-B255-7C137EA70FA7 - 6480ba90afcffb87"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 (__C.UIAlertAction) -&gt; () in Simplifyvms.WebServices.showAlertWithYESNO(title: Swift.String, message: Swift.String, isConditional: Swift.Bool, prentview: __C.UIView, completionBlock: (Swift.Bool) -&gt; ()) -&gt; ()"
+                  moduleName = "Simplifyvms"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/surendrakumark/Dropbox/My%20Mac%20(surendras-MacBook-Air.local)/Desktop/swift_1/Simplifyvms/Simplifyvms/UIExtensions/WebServices.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "122"
+                  endingLineNumber = "122"
+                  offsetFromSymbolStart = "49">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3463208C-4036-41EC-A60A-05ACEC157249"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Simplifyvms/UIExtensions/WebServices.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
+            landmarkName = "showAlertWithYESNO(title:message:isConditional:prentview:completionBlock:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "214064D9-F14B-452E-911D-0B346BCCD0D4"
-            shouldBeEnabled = "No"
+            uuid = "B1322B1F-4323-407F-970E-F844C93000E7"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Simplifyvms/StacksModule/StacksVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
             landmarkName = "getBlogDetails(pageIndex:)"
             landmarkType = "7">
          </BreakpointContent>

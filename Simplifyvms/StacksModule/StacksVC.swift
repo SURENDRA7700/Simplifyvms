@@ -108,14 +108,19 @@ class StacksVC: UIViewController {
         let url : String? = "\(BlogsInfoUrl)\(pageIndex)"
         WebServices.shared.getServiceCall(type: BlogStocksModel.self, urlString: url!, requiredToken: false, view: self.view, animateIndicator: true)
         {  (response) in
-            DispatchQueue.main.async {
-                self.stocksData = response
-                guard self.stocksData?.items != nil else {
-                    ErrorManager.showErrorAlert(mainTitle: "", subTitle: "error")
-                    return }
-                if (self.blogsArray != nil) {
-                    self.blogsArray?.append(contentsOf: (self.stocksData?.items)!)
+            do {
+                DispatchQueue.main.async {
+                    self.stocksData = response
+                    guard self.stocksData?.items != nil else {
+                        ErrorManager.showErrorAlert(mainTitle: "", subTitle: "error")
+                        return }
+                    if (self.blogsArray != nil) {
+                        self.blogsArray?.append(contentsOf: (self.stocksData?.items)!)
+                    }
                 }
+            }
+            catch let error {
+                ErrorManager.showErrorAlert(mainTitle: "", subTitle: error.localizedDescription)
             }
         }
     }
@@ -276,18 +281,22 @@ extension StacksVC : UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        self.searchActive = true
-        let searchString = searchBar.text?.trimWhiteSpace()
-        if searchString != "", searchString!.count > 0 {
-            filterArray?.removeAll()
-            if let text = searchField.text {
-                filterArray = self.blogsArray?.filter{
-                    ($0.title.lowercased().contains(text.lowercased())) ||  ($0.tags?.contains(text))!
+        do {
+            self.searchActive = true
+            let searchString = searchBar.text?.trimWhiteSpace()
+            if searchString != "", searchString!.count > 0 {
+                filterArray?.removeAll()
+                if let text = searchField.text {
+                    filterArray = self.blogsArray?.filter{
+                        ($0.title.lowercased().contains(text.lowercased())) ||  ($0.tags?.contains(text))!
+                    }
                 }
             }
+            tableview.reloadData()
+            self.searchField.resignFirstResponder()
+        } catch let error {
+            ErrorManager.showErrorAlert(mainTitle: "", subTitle: error.localizedDescription)
         }
-        tableview.reloadData()
-        self.searchField.resignFirstResponder()
    }
 
     

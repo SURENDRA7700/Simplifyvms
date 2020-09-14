@@ -94,11 +94,7 @@ class WebServices: NSObject {
                 }
             }.resume()
         }else {
-            
-            self.showAlertWithYESNO(title: "Alert", message: "Internet Connection not Available", isConditional: false, prentview: view)
-            { (ISYESNO) in
-                CompletionHandler(nil)
-            }
+            ErrorManager.showErrorAlert(mainTitle: "Alert", subTitle: "Internet Connection not Available")
         }
     }
     
