@@ -227,30 +227,42 @@ extension StacksVC : UITableViewDelegate, UITableViewDataSource
     }
        
     @objc func favItemSelected(sender:BlogBuuton){
-        sender.isSelected = !sender.isSelected
-        var eachBlog : Item? = nil
-        if self.searchActive {
-            eachBlog = self.filterArray?[sender.tag]
-        }else{
-            eachBlog = self.blogsArray?[sender.tag]
+        
+        do {
+            sender.isSelected = !sender.isSelected
+            var eachBlog : Item? = nil
+            if self.searchActive {
+                if self.filterArray!.count >= 1 {
+                    eachBlog = self.filterArray?[sender.tag]
+                }
+            }else{
+                if self.blogsArray!.count >= 1 {
+                    eachBlog = self.blogsArray?[sender.tag]
+                }
+            }
+            if eachBlog != nil  {
+                if sender.isSelected {
+                    eachBlog?.isSelectedFav = true
+                }else{
+                    eachBlog?.isSelectedFav = false
+                }
+                if let index = WebServices.shared.userCartData?.index(where: {$0.owner?.userID == eachBlog?.owner?.userID}) {
+                    WebServices.shared.userCartData?.remove(at: index)
+                }else{
+                    WebServices.shared.userCartData?.append(eachBlog!)
+                }
+                if let index = self.blogsArray?.index(where: {$0.owner?.userID == eachBlog?.owner?.userID}) {
+                    self.blogsArray?[index] = eachBlog!
+                }
+                if self.searchActive {
+                    self.filterArray?[sender.tag] = eachBlog!
+                }
+                tableview.reloadData()
+            }
         }
-        if sender.isSelected {
-            eachBlog?.isSelectedFav = true
-        }else{
-            eachBlog?.isSelectedFav = false
+        catch let error {
+            ErrorManager.showErrorAlert(mainTitle: "", subTitle: error.localizedDescription)
         }
-        if let index = WebServices.shared.userCartData?.index(where: {$0.owner?.userID == eachBlog?.owner?.userID}) {
-            WebServices.shared.userCartData?.remove(at: index)
-        }else{
-            WebServices.shared.userCartData?.append(eachBlog!)
-        }
-        if let index = self.blogsArray?.index(where: {$0.owner?.userID == eachBlog?.owner?.userID}) {
-            self.blogsArray?[index] = eachBlog!
-        }
-        if self.searchActive {
-            self.filterArray?[sender.tag] = eachBlog!
-        }
-        tableview.reloadData()
     }
 
 }

@@ -119,16 +119,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B1322B1F-4323-407F-970E-F844C93000E7"
+            uuid = "AABA12E6-2337-45EC-B09B-58A3A81530BB"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Simplifyvms/StacksModule/StacksVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
-            landmarkName = "getBlogDetails(pageIndex:)"
+            startingLineNumber = "234"
+            endingLineNumber = "234"
+            landmarkName = "favItemSelected(sender:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
