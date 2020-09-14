@@ -19,51 +19,6 @@ class WebServices: NSObject {
     private override init() {}
     
     //MARK:- Post request call
-    func postServiceCall<T: Codable>(type: T.Type, urlString: String, requiredToken: Bool, parameters: [String:Any], view: UIView, animateIndicator: Bool, completion completionHandler: @escaping(T?,Error?) -> Void)
-    {
-        if (NetworkManager.sharedInstance.reachability.isReachable) {
-            print("Internet Connection Available!")
-            var activityIndicatorObj = UIActivityIndicatorView()
-            DispatchQueue.main.async {
-                activityIndicatorObj = self.showActivityIndicator(view: view, animate:true)
-            }
-            
-            guard let url = URL(string: urlString) else { return }
-            var request = URLRequest(url: url)
-            request.httpMethod = "POST"
-            guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else {return}
-            request.httpBody = httpBody;
-            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            request.addValue("application/json", forHTTPHeaderField: "Accept")
-            if requiredToken {
-                let tokenStr = "Bearer \(defaults.object(forKey: kToken)!) "
-                request.setValue(tokenStr, forHTTPHeaderField: "Authorization")
-            }
-            request.timeoutInterval = 120
-            let session = URLSession.shared
-            session.dataTask(with: request) { (data, response, error) in
-                guard let responseData = data else {return}
-                do {
-                    let jsonData = try JSONDecoder().decode(T.self, from: responseData)
-                    completionHandler(jsonData,error)
-                    self.removeActivityindicator(indicator: activityIndicatorObj)
-                }
-                catch {
-                    self.removeActivityindicator(indicator: activityIndicatorObj)
-                    completionHandler(nil,error)
-                }
-                self.removeActivityindicator(indicator: activityIndicatorObj)
-            }.resume()
-            
-        }else{
-            print("Internet Connection not Available!")
-            self.showAlertWithYESNO(title: "Alert", message: "Internet Connection not Available", isConditional: false, prentview: view)
-            { (ISYESNO) in
-                completionHandler(nil,nil)
-            }
-        }
-    }
-
     
     func getServiceCall<T:Codable>(type : T.Type,urlString : String,requiredToken: Bool, view: UIView, animateIndicator: Bool,complete CompletionHandler : @escaping(T?)->Void)
     {
@@ -89,8 +44,12 @@ class WebServices: NSObject {
                     self.removeActivityindicator(indicator: activityIndicatorObj)
                     CompletionHandler(jsonData)
                 }
-                catch {
-                    self.removeActivityindicator(indicator: activityIndicatorObj)
+                catch let error as NSError {
+                    print(error.localizedDescription)
+                    DispatchQueue.main.async() {
+                        self.removeActivityindicator(indicator: activityIndicatorObj)
+                        ErrorManager.showErrorAlert(mainTitle: "Alert", subTitle: error.localizedDescription)
+                    }
                 }
             }.resume()
         }else {
@@ -99,33 +58,6 @@ class WebServices: NSObject {
     }
     
    
-    func showAlertWithYESNO(title: String, message: String, isConditional: Bool, prentview: UIView, completionBlock: @escaping (_: Bool) -> Void) {
-           
-           let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-           
-           // Check whether it's conditional or not ('YES' 'NO, or just 'OK')
-           if isConditional
-           {
-               alert.addAction(UIAlertAction(title: NSLocalizedString("yes", comment: ""), style: UIAlertAction.Style.default, handler: { (action: UIAlertAction) in
-                   alert.dismiss(animated: true, completion: nil)
-                   completionBlock(true)
-               }))
-               
-               alert.addAction(UIAlertAction(title: NSLocalizedString("no", comment: ""), style: UIAlertAction.Style.default, handler: { (action: UIAlertAction) in
-                   alert.dismiss(animated: true, completion: nil)
-                   completionBlock(false)
-               }))
-           }
-           else
-           {
-               alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "ok"), style: UIAlertAction.Style.default, handler: { (action: UIAlertAction) in
-                   alert.dismiss(animated: true, completion: nil)
-                   completionBlock(true)
-               }))
-           }
-           
-           alert.show()
-       }
 }
 
 
