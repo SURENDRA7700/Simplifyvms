@@ -135,6 +135,7 @@ class StacksVC: UIViewController {
                             ErrorManager.showErrorAlert(mainTitle: "", subTitle: "error")
                             return }
                         if (self.blogsArray != nil) {
+                            self.searchActive = false
                             self.blogsArray?.append(contentsOf: (self.stocksData?.items)!)
                         }
                     }
