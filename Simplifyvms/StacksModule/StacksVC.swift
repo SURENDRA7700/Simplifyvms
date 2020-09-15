@@ -36,6 +36,7 @@ class StacksVC: UIViewController {
     var didEndReached:Bool=false
 
     
+    
     lazy var searchField:UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.searchBarStyle = UISearchBar.Style.minimal
@@ -96,6 +97,9 @@ class StacksVC: UIViewController {
         tableview.rowHeight = UITableView.automaticDimension
         tableview.estimatedRowHeight = 100
 
+        //Bsckground refresh
+        registerForNotifications()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -103,7 +107,21 @@ class StacksVC: UIViewController {
         self.getBlogDetails(pageIndex:self.pageNo)
     }
     
-    private func getBlogDetails(pageIndex : Int)
+    func registerForNotifications() {
+       NotificationCenter.default.addObserver(
+         forName: .newItemsFetched,
+         object: nil,
+         queue: nil) { (notification) in
+           print("notification received")
+           if let uInfo = notification.userInfo,
+              let itemsInfo = uInfo["items"] as? Any {
+           }
+       }
+     }
+    
+    
+    
+     func getBlogDetails(pageIndex : Int)
     {
         if (NetworkManager.sharedInstance.reachability.isConnectedToNetwork()) {
             self.emptyStateView.removeFromSuperview()
@@ -223,7 +241,7 @@ extension StacksVC : UITableViewDelegate, UITableViewDataSource
         self.searchField.resignFirstResponder()
     }
     
-     //Pagination
+     //Pagination to load more items
      func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
          if ((tableview.contentOffset.y + tableview.frame.size.height) >= tableview.contentSize.height)
          {
@@ -242,6 +260,7 @@ extension StacksVC : UITableViewDelegate, UITableViewDataSource
         return stringArray.joined(separator: ",")
     }
        
+    //Selection of each item adding
     @objc func favItemSelected(sender:BlogBuuton){
         
         do {
@@ -308,6 +327,7 @@ extension StacksVC : UISearchBarDelegate {
         self.tableview.reloadData()
     }
     
+    //filter search results
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         do {
             self.searchActive = true
