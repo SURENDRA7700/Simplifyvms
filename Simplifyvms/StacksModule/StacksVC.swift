@@ -319,7 +319,9 @@ extension StacksVC : UISearchBarDelegate {
  
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         self.searchActive = true
+        self.filterArray?.removeAll()
     }
+    
 
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

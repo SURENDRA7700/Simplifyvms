@@ -7,22 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F48D85EE-1470-4C94-89E0-222ED8AD1E85"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Simplifyvms/StacksModule/StacksVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "314"
-            endingLineNumber = "314"
-            landmarkName = "searchBar(_:textDidChange:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "CD3554AB-DB2B-41EA-B63B-142B6789BEA8"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -30,24 +14,8 @@
             filePath = "Simplifyvms/StacksModule/StacksVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "335"
-            endingLineNumber = "335"
-            landmarkName = "searchBarSearchButtonClicked(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "ACCE06C6-17F4-477A-9E5C-5374FB060902"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Simplifyvms/StacksModule/StacksVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "344"
-            endingLineNumber = "344"
+            startingLineNumber = "337"
+            endingLineNumber = "337"
             landmarkName = "searchBarSearchButtonClicked(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -71,32 +39,64 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "05A0C985-1FEF-48F1-9F4F-B54F18B70595"
-            shouldBeEnabled = "Yes"
+            uuid = "E39B05D9-F1CB-4399-93D8-CE2D9D763BB1"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Simplifyvms/StacksModule/StacksVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "321"
-            endingLineNumber = "321"
-            landmarkName = "searchBarTextDidBeginEditing(_:)"
+            startingLineNumber = "285"
+            endingLineNumber = "285"
+            landmarkName = "favItemSelected(sender:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E39B05D9-F1CB-4399-93D8-CE2D9D763BB1 - 7a3cc8d137aafcab"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Simplifyvms.StacksVC.favItemSelected(sender: Simplifyvms.BlogBuuton) -&gt; ()"
+                  moduleName = "Simplifyvms"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/surendrakumark/Dropbox/My%20Mac%20(surendras-MacBook-Air.local)/Desktop/swift_1/Simplifyvms/Simplifyvms/StacksModule/StacksVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "285"
+                  endingLineNumber = "285"
+                  offsetFromSymbolStart = "11011">
+               </Location>
+               <Location
+                  uuid = "E39B05D9-F1CB-4399-93D8-CE2D9D763BB1 - e4a5118a249ad5b1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Simplifyvms.Item) -&gt; Swift.Bool in Simplifyvms.StacksVC.favItemSelected(sender: Simplifyvms.BlogBuuton) -&gt; ()"
+                  moduleName = "Simplifyvms"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/surendrakumark/Dropbox/My%20Mac%20(surendras-MacBook-Air.local)/Desktop/swift_1/Simplifyvms/Simplifyvms/StacksModule/StacksVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "285"
+                  endingLineNumber = "285"
+                  offsetFromSymbolStart = "126">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "6174F219-813F-4681-96FA-3CCA0F8224D7"
+            uuid = "FC71DBFE-3EB1-4EE0-A061-486C6650A8D7"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Simplifyvms/StacksModule/StacksVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "326"
-            endingLineNumber = "326"
-            landmarkName = "searchBarCancelButtonClicked(_:)"
+            startingLineNumber = "322"
+            endingLineNumber = "322"
+            landmarkName = "searchBarTextDidBeginEditing(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
