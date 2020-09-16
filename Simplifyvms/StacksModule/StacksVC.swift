@@ -119,7 +119,7 @@ class StacksVC: UIViewController {
        }
      }
     
-    
+
     
      func getBlogDetails(pageIndex : Int)
     {
@@ -137,6 +137,14 @@ class StacksVC: UIViewController {
                         if (self.blogsArray != nil) {
                             self.searchActive = false
                             self.blogsArray?.append(contentsOf: (self.stocksData?.items)!)
+                            var uniquePosts = [Item]()
+                            for post in self.blogsArray! {
+                                if !uniquePosts.contains(where: {$0.owner?.userID == post.owner?.userID }) {
+                                    uniquePosts.append(post)
+                                }
+                            }
+                            self.blogsArray = uniquePosts
+                            self.tableview.reloadData()
                         }
                     }
                 }
@@ -377,4 +385,8 @@ extension UITableView {
         self.backgroundView = nil
     }
 }
+
+
+
+
 
